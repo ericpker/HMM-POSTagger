@@ -1,5 +1,5 @@
-This is a simple test
+This is a simple test.
 
-A complete. sample. is a set of objects from a parent population that includes ALL such objects that satisfy a set of well-defined selection criteria.[3] For example, a complete sample of Australian men taller than 2m would consist of a list of every Australian male taller than 2m. But it wouldn't include German males, or tall Australian females, or people shorter than 2m. So to compile such a complete sample requires a complete list of the parent population, including data on height, gender, and nationality for each member of that parent population. In the case of human populations, such a complete list is unlikely to exist, but such complete samples are often available in other disciplines, such as complete magnitude-limited samples of astronomical objects.
+A test of the system
 
-An unbiased (representative) sample is a set of objects chosen from a complete sample using a selection process that does not depend on the properties of the objects.[4] For example, an unbiased sample of Australian men taller than 2m might consist of a randomly sampled subset of 1% of Australian males taller than 2m. But one chosen from the electoral register might not be unbiased since, for example, males aged under 18 will not be on the electoral register. In an astronomical context, an unbiased sample might consist of that fraction of a complete sample for which data are available, provided the data availability is not biased by individual source properties.
+To confirm it works as intended

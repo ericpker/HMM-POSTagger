@@ -13,15 +13,11 @@ public class Tokenize {
 	
 	private Pattern pattern;
 	private Matcher matcher;
-	private Console console;
-	
-	private boolean newSentence = true;
 	private Sentence sentence;
 	private Word word;
 
 	public Tokenize()
 	{
-		console = System.console();
 		pattern = Pattern.compile("([" + English.puctuation + "] *)");
 	}
 	
@@ -38,17 +34,17 @@ public class Tokenize {
     	matcher = pattern.matcher(text.getContent());
     	text.setContent(matcher.replaceAll("\\."));
 
-    	String[] sentences = text.getContent().split("\\.|\\r\\n|\\r|\\n");
+    	String[] sentences = text.getContent().split("(\\.|\\r\\n|\\r(?!\\n)|(?<!\\r)\\n)+");
     	for(String s:sentences) {
     		sentence = new Sentence();
     		String[] words = s.split(" ");
     		for(String w:words) {
     			word = new Word(w);
     			sentence.addWord(word);
-//    			System.out.println("Adding word:" + word.getWord());
+    			System.out.println("Adding word:" + word.getWord());
     		}
     		text.addSentence(sentence);
-//    		System.out.println("Adding sentence:" + sentence);
+    		System.out.println("Adding sentence:" + sentence);
     	}
 	}
 	

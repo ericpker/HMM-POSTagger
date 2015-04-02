@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 public class Sentence {
-	private ArrayList<Word> words;
+	public ArrayList<Word> words;
 	
 	public Sentence()
 	{

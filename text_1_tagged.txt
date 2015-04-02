@@ -1,15 +1,3 @@
 This_UNK is_UNK a_UNK simple_UNK test_UNK 
-_UNK 
-A_UNK complete_UNK 
-sample_UNK 
-is_UNK a_UNK set_UNK of_UNK objects_UNK from_UNK a_UNK parent_UNK population_UNK that_UNK includes_UNK ALL_UNK such_UNK objects_UNK that_UNK satisfy_UNK a_UNK set_UNK of_UNK well-defined_UNK selection_UNK criteria_UNK 
-[_UNK 3_UNK ]_UNK For_UNK example_UNK ,_UNK a_UNK complete_UNK sample_UNK of_UNK Australian_UNK men_UNK taller_UNK than_UNK 2m_UNK would_UNK consist_UNK of_UNK a_UNK list_UNK of_UNK every_UNK Australian_UNK male_UNK taller_UNK than_UNK 2m_UNK 
-But_UNK it_UNK wouldn't_UNK include_UNK German_UNK males_UNK ,_UNK or_UNK tall_UNK Australian_UNK females_UNK ,_UNK or_UNK people_UNK shorter_UNK than_UNK 2m_UNK 
-So_UNK to_UNK compile_UNK such_UNK a_UNK complete_UNK sample_UNK requires_UNK a_UNK complete_UNK list_UNK of_UNK the_UNK parent_UNK population_UNK ,_UNK including_UNK data_UNK on_UNK height_UNK ,_UNK gender_UNK ,_UNK and_UNK nationality_UNK for_UNK each_UNK member_UNK of_UNK that_UNK parent_UNK population_UNK 
-In_UNK the_UNK case_UNK of_UNK human_UNK populations_UNK ,_UNK such_UNK a_UNK complete_UNK list_UNK is_UNK unlikely_UNK to_UNK exist_UNK ,_UNK but_UNK such_UNK complete_UNK samples_UNK are_UNK often_UNK available_UNK in_UNK other_UNK disciplines_UNK ,_UNK such_UNK as_UNK complete_UNK magnitude-limited_UNK samples_UNK of_UNK astronomical_UNK objects_UNK 
-_UNK 
-_UNK 
-An_UNK unbiased_UNK (_UNK representative_UNK )_UNK sample_UNK is_UNK a_UNK set_UNK of_UNK objects_UNK chosen_UNK from_UNK a_UNK complete_UNK sample_UNK using_UNK a_UNK selection_UNK process_UNK that_UNK does_UNK not_UNK depend_UNK on_UNK the_UNK properties_UNK of_UNK the_UNK objects_UNK 
-[_UNK 4_UNK ]_UNK For_UNK example_UNK ,_UNK an_UNK unbiased_UNK sample_UNK of_UNK Australian_UNK men_UNK taller_UNK than_UNK 2m_UNK might_UNK consist_UNK of_UNK a_UNK randomly_UNK sampled_UNK subset_UNK of_UNK 1_UNK %_UNK of_UNK Australian_UNK males_UNK taller_UNK than_UNK 2m_UNK 
-But_UNK one_UNK chosen_UNK from_UNK the_UNK electoral_UNK register_UNK might_UNK not_UNK be_UNK unbiased_UNK since_UNK ,_UNK for_UNK example_UNK ,_UNK males_UNK aged_UNK under_UNK 18_UNK will_UNK not_UNK be_UNK on_UNK the_UNK electoral_UNK register_UNK 
-In_UNK an_UNK astronomical_UNK context_UNK ,_UNK an_UNK unbiased_UNK sample_UNK might_UNK consist_UNK of_UNK that_UNK fraction_UNK of_UNK a_UNK complete_UNK sample_UNK for_UNK which_UNK data_UNK are_UNK available_UNK ,_UNK provided_UNK the_UNK data_UNK availability_UNK is_UNK not_UNK biased_UNK by_UNK individual_UNK source_UNK properties_UNK 
+A_UNK test_UNK of_UNK the_UNK system_UNK 
+To_UNK confirm_UNK it_UNK works_UNK as_UNK intended_UNK 

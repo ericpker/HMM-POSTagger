@@ -47,7 +47,7 @@ public class DataManager {
 			tokenizer = new tokenize.Tokenize();
 			tokenizer.tokenizeText(text);
 			tagger = new Tagger(text);
-			tagger.tagText(text);
+			tagger.tagSentence(text);
 			Save(outputFile);
 		}
 		catch(Exception e) {
