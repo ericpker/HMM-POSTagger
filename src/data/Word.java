@@ -1,4 +1,4 @@
-package parser;
+package data;
 
 import pennTagSet.PartOfSpeech;
 
@@ -29,6 +29,6 @@ public class Word {
 	
 	@Override
 	public String toString() {
-		return word + pos;		
+		return word + "_" + pos;		
 	}
 }

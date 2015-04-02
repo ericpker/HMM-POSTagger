@@ -1,4 +1,6 @@
-package parser;
+package data;
+
+import hmmTagger.Tagger;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,6 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Scanner;
+
+import tokenize.Tokenize;
 
 public class DataManager {
 	private String inputFileName;
@@ -17,12 +21,15 @@ public class DataManager {
 	private Scanner input;
 	private Writer writer;
 	private Text text;
+	private Tagger tagger;
+	private Tokenize tokenizer;
 	
 	public DataManager()
 	{
 		inputFileName = "text_1" + ".txt";
 		outputFileName = "text_1_tagged" + ".txt";
 		fileContent = "";
+		text = new Text();
 	}
 	
 	public static void main(String[] args)
@@ -37,10 +44,14 @@ public class DataManager {
 			inputFile = new File(inputFileName);
 			outputFile = new File(outputFileName);
 			Load(inputFile);
-			Save(outputFile);			
+			tokenizer = new tokenize.Tokenize();
+			tokenizer.tokenizeText(text);
+			tagger = new Tagger(text);
+			tagger.tagText(text);
+			Save(outputFile);
 		}
 		catch(Exception e) {
-			System.exit(1);
+			e.printStackTrace();
 		}
 		
 	}
@@ -77,7 +88,7 @@ public class DataManager {
  
 			FileWriter fw = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
-			String content = text.getContent();
+			String content = text.toString();
 			bw.write(content);
 			bw.close();
  
