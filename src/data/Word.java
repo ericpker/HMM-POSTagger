@@ -4,7 +4,8 @@ import pennTagSet.PartOfSpeech;
 
 public class Word {
 	private String word = "";
-	private PartOfSpeech pos = null; 
+	private PartOfSpeech pos = null;
+	private double[] observedProbability;
 	
 	public Word(String word) {
 		this.setWord(word);
