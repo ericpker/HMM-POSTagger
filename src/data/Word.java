@@ -9,7 +9,7 @@ public class Word {
 	
 	public Word(String word) {
 		this.setWord(word);
-		this.setPos(PartOfSpeech.UNK);
+		this.setPos(PartOfSpeech.NN);
 	}
 
 	public String getWord() {
@@ -31,5 +31,15 @@ public class Word {
 	@Override
 	public String toString() {
 		return word + "_" + pos;		
+	}
+
+	public int getTransitionProbability(int i, int n) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public int getObservedProbability(int n) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
