@@ -2,6 +2,9 @@ package hmmTagger;
 
 public class Tagger {
 	
+	float[][] Viterbi;
+	int[][] Backtrace;
+	
 	public Tagger(){
 		
 	}
