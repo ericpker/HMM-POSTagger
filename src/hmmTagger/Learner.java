@@ -4,7 +4,7 @@ import pennTagSet.PartOfSpeech;
 
 public class Learner {
 
-	PartOfSpeech[][] forward;
+	int[][] forward;
 	public Learner() {
 		
 	}
