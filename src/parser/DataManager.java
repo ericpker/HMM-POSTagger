@@ -16,6 +16,7 @@ public class DataManager {
 	private File outputFile;
 	private Scanner input;
 	private Writer writer;
+	private Text text;
 	
 	public DataManager()
 	{
@@ -32,10 +33,15 @@ public class DataManager {
 
 	private void run()
 	{
-		inputFile = new File(inputFileName);
-		outputFile = new File(outputFileName);
-		Load(inputFile);
-		Save(outputFile);
+		try {
+			inputFile = new File(inputFileName);
+			outputFile = new File(outputFileName);
+			Load(inputFile);
+			Save(outputFile);			
+		}
+		catch(Exception e) {
+			System.exit(1);
+		}
 		
 	}
 	
@@ -52,7 +58,7 @@ public class DataManager {
 					fileContent += "\r\n";
 			}
 			
-			text.setText(fileContent);
+			text.setContent(fileContent);
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -71,7 +77,7 @@ public class DataManager {
  
 			FileWriter fw = new FileWriter(file.getAbsoluteFile());
 			BufferedWriter bw = new BufferedWriter(fw);
-			String content = text.toString();
+			String content = text.getContent();
 			bw.write(content);
 			bw.close();
  
