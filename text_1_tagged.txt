@@ -1,2 +1,2 @@
-I_PRP went_VBD to_TO the_VB bank_null 
-I_PRP 'm_VBD going_TO to_VB bank_DT the_NN money_null 
+-Start-_START I_null went_null to_null the_null bank_null -END-_END 
+-Start-_START I_null 'm_null going_null to_null bank_null the_null money_null -END-_END 

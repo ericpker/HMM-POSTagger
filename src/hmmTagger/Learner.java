@@ -61,7 +61,7 @@ public class Learner {
     	PartOfSpeech currentPOS;
     	PartOfSpeech previousPOS;
     	for(String s:sentences) {
-    		previousPOS=PartOfSpeech.UNK;
+    		previousPOS=PartOfSpeech.START;
     		if(!s.isEmpty()) {
     		sentence = new Sentence();
     		String[] words = s.split(" ");

@@ -53,7 +53,7 @@ public class Tokenize {
     			sentence.addWord(word);
     			System.out.println("Adding word:" + word.getWord());
     		}
-    		sentence.addWord(null);
+    		sentence.addEnd();
     		text.addSentence(sentence);
     		System.out.println("Adding sentence:" + sentence);
     	}

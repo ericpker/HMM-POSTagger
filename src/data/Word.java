@@ -25,6 +25,10 @@ public class Word {
 		}
 		number = 0;
 	}
+	
+	public Word() {
+		
+	}
 
 	public Word(double[] probability) {
 		observedProbability = probability;

@@ -53,8 +53,8 @@ public class DataManager {
 			Load(inputFile);
 			tokenizer = new tokenize.Tokenize(this);
 			tokenizer.tokenizeText(text);
-			tagger = new Tagger(text);
-			tagger.tag();
+		/*	tagger = new Tagger(text);
+			tagger.tag();*/
 			Save(outputFile);
 		}
 		catch(Exception e) {
