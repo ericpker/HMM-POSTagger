@@ -34,14 +34,14 @@ public class Word {
 		observedProbability = probability;
 	}
 
-	public void addInstance(PartOfSpeech pos,PartOfSpeech previous) {
-		System.out.println("ADDING INSTANCE");
+	public void addInstance(PartOfSpeech currentPOS,PartOfSpeech previousPOS) {
+		System.out.println("Word transitioning from " + previousPOS + " to " + currentPOS);
 		number++;
-		numberPOS[pos.getPOSIndex()]++;
-		observedProbability[pos.getPOSIndex()] = (double)numberPOS[pos.getPOSIndex()]/number;
-		transitionCount[previous.getPOSIndex()][pos.getPOSIndex()]++;
-		transition[pos.getPOSIndex()]++;
-		transitionProbability[pos.getPOSIndex()][previous.getPOSIndex()] = (double)transitionCount[previous.getPOSIndex()][pos.getPOSIndex()]/transition[pos.getPOSIndex()];
+		numberPOS[currentPOS.getPOSIndex()]++;
+		observedProbability[currentPOS.getPOSIndex()] = (double)numberPOS[currentPOS.getPOSIndex()]/number;
+		transitionCount[previousPOS.getPOSIndex()][currentPOS.getPOSIndex()]++;
+		transition[currentPOS.getPOSIndex()]++;
+		transitionProbability[currentPOS.getPOSIndex()][previousPOS.getPOSIndex()] = (double)transitionCount[previousPOS.getPOSIndex()][currentPOS.getPOSIndex()]/transition[currentPOS.getPOSIndex()];
 	}
 	
 	public void smoothWords() {

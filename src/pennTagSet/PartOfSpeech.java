@@ -40,7 +40,7 @@ public enum PartOfSpeech {
 	WRB(36), // Wh-adverb
 	END(37) // ending position for Viterbi
 	;
-	public static int total = 36; //1 through 36 are the Penn Tags
+	public static int total = 38; //1 through 36 are the Penn Tags
 	private int index;
 	
 	PartOfSpeech(int index) {

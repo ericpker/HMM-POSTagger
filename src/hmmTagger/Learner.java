@@ -53,7 +53,7 @@ public class Learner {
 		private Pattern contractionPattern;
 		private Matcher matcher;
 		private Sentence sentence;
-		private Word word;
+		private Word current;
 		private Pattern punctuationPattern;
 		
 	public void tokenizeText(Text text) {
@@ -68,22 +68,27 @@ public class Learner {
     		for(String w:words) {
     			if(!w.isEmpty()) {
     			String[] splitWord = w.split("_");
-    			Word current = getWord(splitWord[0]);
+    			current = getWord(splitWord[0]);
 				currentPOS = getEnumFromString(PartOfSpeech.class, splitWord[1]);
     			if(current!=null) {
 	    			current.addInstance(currentPOS, previousPOS);
 	    			this.words.add(current);
+	    			current.setPos(currentPOS);
+	    			sentence.addWord(current);
 	    			System.out.println("Adding to word:" + current.getWord());
 	    			}else {
-	        			word = new Word(splitWord[0]);
-	        			word.addInstance(currentPOS, previousPOS);
-	        			this.words.add(word);
-	        			System.out.println("Creating new word:" + word.getWord());
+	        			current = new Word(splitWord[0]);
+	        			current.addInstance(currentPOS, previousPOS);
+	        			this.words.add(current);
+		    			current.setPos(currentPOS);
+		    			sentence.addWord(current);
+	        			System.out.println("Creating new word:" + current.getWord());
 	    			}
-    			System.out.println("Word transitioning from " + previousPOS + " to " + currentPOS);
     			previousPOS=currentPOS;
     			}
     		}
+    		current.addInstance(PartOfSpeech.END, previousPOS);
+    		sentence.addEnd();
     		text.addSentence(sentence);
     		System.out.println("Adding sentence:" + sentence);
     		}
