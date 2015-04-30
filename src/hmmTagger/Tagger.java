@@ -10,36 +10,33 @@ public class Tagger {
 	double[][] viterbi = null;
 	double[][] transitionProbability = null;
 	double[]emissionProbability = null;
-	int[] backpointer = null;
+	int[][] backpointer = null;
 	int N;
 	int T;
 	
 	
 	public Tagger(Text text){
 		for(Sentence sentence: text.sentences) {
-			int N = 37;
+			int N = PartOfSpeech.total;
 			int T = sentence.words.size()-1;
 			viterbi = new double[N][T];
-			backpointer = new int[T];
+			backpointer = new int[N][T];
 			
-			for(int state = 0; state<N; state++) {
-//					viterbi[n][0] = transitionProbability[0][n] * emissionProbability[0];
-//					viterbi[n][1] = sentence.words.get(1).getTransitionProbability(n,36) * sentence.words.get(1).getObservedProbability(n);
+			for(int state = 1; state<N; state++) {
 					viterbi[state][1] = (double)sentence.words.get(1).getObservedProbability(state);
-//					System.out.println(viterbi[n][0]);
-//					viterbi[n][1] = 1;
-					backpointer[1] = 36;
+					backpointer[state][1] = 0;
 			}
 
 			System.out.println("init");
 			
-			for(int t = 2; t<T; t++) {
+			for(int t = 1; t<T; t++) {
 				double total = 0;
 				double valmax = 0;
 				int argmax = 0;
 				System.out.println("~~~~~~~~~~" + t + "~~~~~~~~~~~~~");
 				for(int state = 0; state<N; state++) {
-	//				if(sentence.words.get(t)==null)						
+	//				if(sentence.words.get(t)==null)	
+					System.out.println("Checking word " + sentence.words.get(t));
 					double v_prob = (double)(viterbi[backpointer[t-1]][t-1] * sentence.words.get(t).getTransitionProbability(state, backpointer[t-1]) * sentence.words.get(t).getObservedProbability(state));
 					System.out.println("Mult:" + viterbi[backpointer[t-1]][t-1] + " * "+ sentence.words.get(t).getTransitionProbability(state, backpointer[t-1]) + "* "+ sentence.words.get(t).getObservedProbability(state));
 					if(v_prob>valmax){
@@ -50,6 +47,7 @@ public class Tagger {
 						System.out.println("Argmax changing to " + argmax);
 						backpointer[t] = argmax;
 						sentence.words.get(t-1).setPos(getPOS(argmax));
+						System.out.println("Setting word " + sentence.words.get(t-1) + " POS to " + sentence.words.get(t-1).getPos());
 					}				
 				}
 			}	
