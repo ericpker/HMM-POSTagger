@@ -1,3 +1,2 @@
-This_NN is_NN a_NN simple_NN test_NN 
-A_NN test_NN of_NN the_NN system_NN 
-To_NN confirm_NN it_NN works_NN as_NN intended_NN isn't_NN 
+I_PRP went_VBD to_TO the_VB bank_null 
+I_PRP 'm_VBD going_TO to_VB bank_DT the_NN money_null 

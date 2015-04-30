@@ -4,6 +4,7 @@ import java.io.Console;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import data.DataManager;
 import data.Sentence;
 import data.Text;
 import data.Word;
@@ -12,19 +13,28 @@ import data.Word;
 public class Tokenize {
 	
 	private Pattern pattern;
+	private Pattern contractionPattern;
 	private Matcher matcher;
 	private Sentence sentence;
 	private Word word;
+	private Pattern punctuationPattern;
+	private DataManager data;
 
-	public Tokenize()
+	public Tokenize(DataManager dataManager)
 	{
-		pattern = Pattern.compile("([" + English.puctuation + "] *)");
+		punctuationPattern = Pattern.compile("([" + English.puctuation + "] *)");
+		contractionPattern = Pattern.compile("(" + English.contraction + ")");
+		data = dataManager;
 	}
 	
 	public void tokenizeText(Text text) {
-		matcher = pattern.matcher(text.getContent());
+		matcher = punctuationPattern.matcher(text.getContent());
 		
     	text.setContent(matcher.replaceAll(" $1 "));
+    	
+    	matcher = contractionPattern.matcher(text.getContent());
+    	
+    	text.setContent(matcher.replaceAll(" $1"));
     	
     	pattern = Pattern.compile(" +");
     	matcher = pattern.matcher(text.getContent());
@@ -39,10 +49,11 @@ public class Tokenize {
     		sentence = new Sentence();
     		String[] words = s.split(" ");
     		for(String w:words) {
-    			word = new Word(w);
+    			word = data.queryWord(w);
     			sentence.addWord(word);
     			System.out.println("Adding word:" + word.getWord());
     		}
+    		sentence.addWord(null);
     		text.addSentence(sentence);
     		System.out.println("Adding sentence:" + sentence);
     	}

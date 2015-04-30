@@ -1,5 +1,6 @@
 package data;
 
+import hmmTagger.Learner;
 import hmmTagger.Tagger;
 
 import java.io.BufferedWriter;
@@ -15,6 +16,7 @@ import tokenize.Tokenize;
 public class DataManager {
 	private String inputFileName;
 	private String outputFileName;
+	private String trainingFileName;
 	private String fileContent;
 	private File inputFile;
 	private File outputFile;
@@ -23,11 +25,14 @@ public class DataManager {
 	private Text text;
 	private Tagger tagger;
 	private Tokenize tokenizer;
+	private File trainingFile;
+	private Learner learner;
 	
 	public DataManager()
 	{
 		inputFileName = "text_1" + ".txt";
 		outputFileName = "text_1_tagged" + ".txt";
+		trainingFileName = "text_1_train" + ".txt";
 		fileContent = "";
 		text = new Text();
 	}
@@ -41,13 +46,15 @@ public class DataManager {
 	private void run()
 	{
 		try {
+			trainingFile = new File(trainingFileName);
+			learner = new Learner(trainingFile);
 			inputFile = new File(inputFileName);
 			outputFile = new File(outputFileName);
 			Load(inputFile);
-			tokenizer = new tokenize.Tokenize();
+			tokenizer = new tokenize.Tokenize(this);
 			tokenizer.tokenizeText(text);
 			tagger = new Tagger(text);
-			tagger.tagSentence(text);
+			tagger.tag();
 			Save(outputFile);
 		}
 		catch(Exception e) {
@@ -94,32 +101,13 @@ public class DataManager {
  
 			System.out.println("Done");
 		} catch (IOException ex) {
-		  // report
+			ex.printStackTrace();
 		} finally {
 		   try {writer.close();} catch (Exception ex) {}
 		}
 	}
 	
-	public double[] queryWord(String word) {
-		double[] observedProbabilities = new double[37];
-		if(word!=null)
-		if(word=="this"){
-			double[] observed = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,};
-			return observed;
-		}
-		if(word=="is"){
-			double[] observed = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,};
-			return observed;
-		}
-		if(word=="a"){
-			double[] observed = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,};
-			return observed;
-		}
-		if(word=="test"){
-			double[] observed = {0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,};
-			return observed;
-		}
-		
-		return observedProbabilities;
+	public Word queryWord(String word) {
+		return learner.getCopyWord(word);
 	}
 }

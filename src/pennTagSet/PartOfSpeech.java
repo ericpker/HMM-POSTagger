@@ -37,8 +37,9 @@ public enum PartOfSpeech {
 	WP(33), // Wh-pronoun
 	WP$(34), // Possessive wh-pronoun
 	WRB(35), // Wh-adverb
-	UNK(36); // Unknown word or unable to determine a tag
-	
+	UNK(36) // Unknown word or unable to determine a tag
+	;
+	public static int total = 37;
 	private int index;
 	
 	PartOfSpeech(int index) {
