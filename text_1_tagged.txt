@@ -1,2 +1,2 @@
--Start-_START I_null went_null to_null the_null bank_null -END-_END 
--Start-_START I_null 'm_null going_null to_null bank_null the_null money_null -END-_END 
+I_PRP went_VBD to_TO the_DT bank_NN 
+I_PRP 'm_VBP going_VBG to_TO bank_VB the_DT money_NN 

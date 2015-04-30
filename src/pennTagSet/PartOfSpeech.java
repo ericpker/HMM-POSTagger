@@ -38,7 +38,8 @@ public enum PartOfSpeech {
 	WP(34), // Wh-pronoun
 	WP$(35), // Possessive wh-pronoun
 	WRB(36), // Wh-adverb
-	END(37) // ending position for Viterbi
+	END(37), // ending position for Viterbi
+	UNK(38)  //Unknown word
 	;
 	public static int total = 38; //1 through 36 are the Penn Tags
 	private int index;

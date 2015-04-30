@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import data.DataManager;
 import data.Sentence;
 import data.Text;
 import data.Word;
@@ -14,13 +15,15 @@ import pennTagSet.PartOfSpeech;
 import tokenize.English;
 
 public class Learner {
+	DataManager database = null;
 	
 	int[][] forward;
 	String fileContent = "";
 	Scanner input = null;
 	private Text text;
 	private ArrayList<Word> words;
-	public Learner(File trainingFile) {
+	public Learner(File trainingFile, DataManager database) {
+		this.database = database;
 		words = new ArrayList<Word>();
 		text = new Text();
 		System.out.println("Beginning to load leaner...");
@@ -68,9 +71,11 @@ public class Learner {
     		for(String w:words) {
     			if(!w.isEmpty()) {
     			String[] splitWord = w.split("_");
+    			String currentWord = splitWord[0];
     			current = getWord(splitWord[0]);
 				currentPOS = getEnumFromString(PartOfSpeech.class, splitWord[1]);
     			if(current!=null) {
+    				database.addWord(previousPOS,currentWord,currentPOS);
 	    			current.addInstance(currentPOS, previousPOS);
 	    			this.words.add(current);
 	    			current.setPos(currentPOS);
@@ -93,9 +98,10 @@ public class Learner {
     		System.out.println("Adding sentence:" + sentence);
     		}
     	}
-    	
+
     	for(Word w:words)
     		w.smoothWords();
+    	Word.calculateProbabilities();
     }
 	
 	private Word getWord(String string) {

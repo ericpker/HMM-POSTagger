@@ -20,7 +20,9 @@ public class Sentence {
 	}
 	
 	public Word addStart() {
-		Word start = new Word();
+		double[] observedProbability = new double[PartOfSpeech.total];
+		observedProbability[PartOfSpeech.END.getPOSIndex()] = 1.0;
+		Word start = new Word(observedProbability);
 		start.setPos(PartOfSpeech.START);
 		start.setWord("-Start-");
 		words.add(start);
@@ -29,7 +31,9 @@ public class Sentence {
 	}
 	
 	public Word addEnd() {
-		Word end = new Word();
+		double[] observedProbability = new double[PartOfSpeech.total];
+		observedProbability[PartOfSpeech.END.getPOSIndex()] = 1.0;
+		Word end = new Word(observedProbability);
 		end.setPos(PartOfSpeech.END);
 		end.setWord("-END-");
 		words.add(end);
@@ -42,7 +46,7 @@ public class Sentence {
 		String textString = "";
 		for(Word word:words)
 		{
-			if(word!=null)
+			if(word!=null&&!(word.getPos()==(PartOfSpeech.START)||word.getPos()==(PartOfSpeech.END)))
 				textString += word + " ";
 		}
 		
