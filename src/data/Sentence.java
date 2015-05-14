@@ -2,8 +2,6 @@ package data;
 
 import java.util.ArrayList;
 
-import pennTagSet.PartOfSpeech;
-
 
 public class Sentence {
 	public ArrayList<Word> words;

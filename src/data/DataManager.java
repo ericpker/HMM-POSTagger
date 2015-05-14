@@ -12,11 +12,11 @@ import java.io.Writer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-import pennTagSet.PartOfSpeech;
 import tokenize.Tokenize;
 
 public class DataManager {
@@ -37,15 +37,20 @@ public class DataManager {
 	private Learner learner;
 	private Connection connection = null;
 	private Statement statement = null;
+	private String activeCorpus = "";
 	
-
-	PreparedStatement preparedAddPOS = null;
-	PreparedStatement preparedAddWord = null;
+	PreparedStatement addTagSet = null;
+	PreparedStatement addTaggedCorpus = null;
+	PreparedStatement addPOS = null;
+	PreparedStatement queryPOS = null;
+	PreparedStatement addWord = null;
+	PreparedStatement queryWord = null;
 	
 	public DataManager()
 	{
 		startConnection();
 		PrepareStatements();
+		activeCorpus = "BLT";
 		inputFileName = "text_1" + ".txt";
 		outputFileName = "text_1_tagged" + ".txt";
 		trainingFileName = "text_1_train" + ".txt";
@@ -57,21 +62,39 @@ public class DataManager {
 	}
 	
 	private void PrepareStatements() {
-		String statement = "insert into penntag.partofspeech(tag_name) values (?)";
+		
+		String statement = "insert into corpus.tag_set(tag_set_name) values (?)";
 		try {
-			preparedAddPOS = connection.prepareStatement(statement);
+			addTagSet = connection.prepareStatement(statement);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
-
-		statement = "insert into penntag.word(word) values (?)";
+		}
+		
+		statement = "insert into corpus.tagged_corpus(corpus_name,tag_set_name) values (?,?)";
 		try {
-			preparedAddWord = connection.prepareStatement(statement);
+			addTaggedCorpus = connection.prepareStatement(statement);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
+		
+		statement = "insert into corpus.partofspeech(tag_name,description,tag_set_name) values (?,?,?)";
+		try {
+			addPOS = connection.prepareStatement(statement);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		statement = "select * from corpus.tag where tag_name = ? and tag_set_name = ?";
+		try {
+			queryPOS = connection.prepareStatement(statement);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public static void main(String[] args)
@@ -112,19 +135,19 @@ public class DataManager {
 		while(posScanner.hasNextLine()) {
 			String tag_name = posScanner.nextLine();
 			try {
-				preparedAddPOS.clearParameters();
+				addPOS.clearParameters();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			try {
-				preparedAddPOS.setString(1, tag_name);
+				addPOS.setString(1, tag_name);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			try {
-				preparedAddPOS.executeUpdate();
+				addPOS.executeUpdate();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -194,29 +217,43 @@ public class DataManager {
 		}
 	}
 	
-	public void addWord(PartOfSpeech previousPOS, String word, PartOfSpeech currentPOS) {			
+	public void addWord(PartOfSpeech previousPOS, String word, PartOfSpeech currentPOS) {
+		String statement = "insert into corpus.word(word,count,corpus_name) values (?,?,?)";
 		try {
-			preparedAddWord.clearParameters();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			preparedAddWord.setString(1, word);
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			preparedAddWord.executeUpdate();
+			addWord = connection.prepareStatement(statement);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		try {
+			addWord.clearParameters();
+			addWord.setString(1, word);
+			addWord.setString(2, count+1);
+			addWord.setString(3, this.activeCorpus);
+			addWord.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public Word queryWord(String word) {
-		return learner.getCopyWord(word);
+		String statement = "select * from corpus.word where word = ?";
+		try {
+			queryWord = connection.prepareStatement(statement);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ResultSet result = null;
+		try {
+			result = queryWord.executeQuery();
+			Word word = new Word(result.getString(0),result.getInt(1);
+			return word;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

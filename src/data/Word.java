@@ -10,23 +10,13 @@ public class Word {
 	static int numberOfTransitions;
 	private double[] observedProbability;
 	private int[] numberPOS;
-	private int numberOfWord;
+	private int numberOfWords;
 	
 	public Word(String word) {
 		this.setWord(word);
-		this.setPos(PartOfSpeech.NN);
-		observedProbability = new double[PartOfSpeech.total];
-		for(int i = 0; i<PartOfSpeech.total; i++) {
-			observedProbability[i] = 0;
-		}
-		numberPOS = new int[PartOfSpeech.total];
-		for(int i = 0; i<PartOfSpeech.total; i++) {
-			numberPOS[i]=0;
-		}
-		numberOfWord = 0;
 	}
 	
-	public Word() {
+	public Word(String word, int count) {
 		
 	}
 
@@ -38,9 +28,9 @@ public class Word {
 		System.out.println("Word transitioning from " + previousPOS + " to " + currentPOS);
 		int currentPOSIndex = currentPOS.getPOSIndex();
 		int previousPOSIndex = previousPOS.getPOSIndex();
-		numberOfWord++;
+		numberOfWords++;
 		numberPOS[currentPOSIndex]++;
-		observedProbability[currentPOSIndex] = (double)numberPOS[currentPOSIndex]/numberOfWord;
+		observedProbability[currentPOSIndex] = (double)numberPOS[currentPOSIndex]/numberOfWords;
 
 		numberOfTransitions++;
 		transitionCount[currentPOSIndex][previousPOSIndex]++;
@@ -53,10 +43,10 @@ public class Word {
 	}
 	
 	public void smoothWords() {
-		numberOfWord+=PartOfSpeech.total;
-		for(int i=0;i<PartOfSpeech.total;i++) {
+		numberOfWords+=PartOfSpeech.total;
+		for(int i=0;i<numberOfWords;i++) {
 			numberPOS[i]++;
-			observedProbability[i] = (double)numberPOS[i]/numberOfWord;
+			observedProbability[i] = (double)numberPOS[i]/numberOfWords;
 		}
 	}
 

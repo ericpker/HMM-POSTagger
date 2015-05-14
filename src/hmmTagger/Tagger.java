@@ -1,6 +1,5 @@
 package hmmTagger;
 
-import pennTagSet.PartOfSpeech;
 import data.Sentence;
 import data.Text;
 import data.Word;

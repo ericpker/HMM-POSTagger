@@ -8,10 +8,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import data.DataManager;
+import data.PartOfSpeech;
 import data.Sentence;
 import data.Text;
 import data.Word;
-import pennTagSet.PartOfSpeech;
 import tokenize.English;
 
 public class Learner {
