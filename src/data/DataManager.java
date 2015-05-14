@@ -45,6 +45,7 @@ public class DataManager {
 	PreparedStatement queryPOS = null;
 	PreparedStatement addWord = null;
 	PreparedStatement queryWord = null;
+	PreparedStatement queryWordFull = null;
 	
 	public DataManager()
 	{
