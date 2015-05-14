@@ -230,7 +230,7 @@ public class DataManager {
 		try {
 			addWord.clearParameters();
 			addWord.setString(1, word);
-			addWord.setString(2, count+1);
+			addWord.setLong(2, 0);
 			addWord.setString(3, this.activeCorpus);
 			addWord.executeUpdate();
 		} catch (SQLException e) {
@@ -238,7 +238,7 @@ public class DataManager {
 		}
 	}
 	
-	public Word queryWord(String word) {
+	public Word queryWord(String searchWord) {
 		String statement = "select * from corpus.word where word = ?";
 		try {
 			queryWord = connection.prepareStatement(statement);
@@ -248,13 +248,21 @@ public class DataManager {
 		}
 		ResultSet result = null;
 		try {
+			queryWord.clearParameters();
+			queryWord.setString(1, searchWord);
 			result = queryWord.executeQuery();
-			Word word = new Word(result.getString(0),result.getInt(1);
+			Word word = new Word(result.getString(0),result.getInt(1));
 			return word;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
+		
+	}
+	
+	public Word queryWordProb(String searchWord) {
+		return null;
+		
 	}
 }
